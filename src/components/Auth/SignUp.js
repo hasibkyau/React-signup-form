@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { Formik } from 'formik';
 import { Alert } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Link, redirect } from 'react-router-dom';
+import Dashboard from '../Dashborad';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+// import { redirect } from "react-router-dom";
 
 import Spinner from '../Spinner/Spinner'
 
@@ -13,19 +17,20 @@ class SignUp extends Component {
         step: 1,
     }
 
+
     switchModeHandler = () => {
         // this.setState({ mode: this.state.mode === "Sign Up" ? "Login" : "Sign Up" })
         this.setState({ step: this.state.step + 1 })
     }
 
-    switchMode = () => {
-        this.setState({ mode: this.state.mode === "Sign Up" ? "Login" : "Sign Up" })
-        // this.setState({ step: this.state.step - 1 })
-    }
-
     switchBack = () => {
         // this.setState({ mode: this.state.mode === "Sign Up" ? "Login" : "Sign Up" })
         this.setState({ step: this.state.step - 1 })
+    }
+
+    Dashboard = () => {
+        console.log("redirect")
+        redirect("/")
     }
 
     render() {
@@ -40,18 +45,29 @@ class SignUp extends Component {
             form = <Formik
                 initialValues={
                     {
-                        fName: "",
-                        lName: "",
+                        first_name: "",
+                        last_Name: "",
+                        phone_number: "",
                         email: "",
                         password: "",
-                        passwordConfirm: "",
-                        phoneNumber: "",
                     }
                 }
 
                 onSubmit={
                     (values) => {
-                        this.props.auth(values.email, values.password, this.state.mode, values.fName, values.lName);
+                        console.log(values)
+                        // this.setState({step: 0})
+  
+
+                        this.props.auth(values.email, values.password, this.state.mode, values.first_name, values.last_Name);
+                        console.log(values)
+                        axios.post('https://test.nexisltd.com/signup', values)
+                            .then(response => {
+                                console.log(response.status)
+                                if(response.status === 200){
+                                    redirect("/Dashboard")
+                                }
+                            });
                     }
                 }
 
@@ -66,17 +82,10 @@ class SignUp extends Component {
 
                     if (!values.password) {
                         errors.password = 'Required';
-                    } else if (values.password.length < 4) {
-                        errors.password = 'Must be atleast 6 characters!';
+                    } else if (values.password.length < 8) {
+                        errors.password = 'Must be atleast 8 characters!';
                     }
 
-                    if (this.state.mode === "Sign Up") {
-                        if (!values.passwordConfirm) {
-                            errors.passwordConfirm = 'Required';
-                        } else if (values.password !== values.passwordConfirm) {
-                            errors.passwordConfirm = 'Password field does no match!';
-                        }
-                    }
                     //console.log("Errors:", errors)
                     return errors;
                 }}
@@ -91,20 +100,20 @@ class SignUp extends Component {
                                     <p className='Title1'>SignUp Form</p>
                                     <input
                                         required={true}
-                                        name="fName"
+                                        name="first_name"
                                         placeholder="Write First Name"
                                         className="form-control"
-                                        value={values.fName}
+                                        value={values.first_name}
                                         onChange={handleChange}
                                     />
                                     <br />
 
                                     <input
                                         required={true}
-                                        name="lName"
+                                        name="last_Name"
                                         placeholder="Write Last Name"
                                         className="form-control"
-                                        value={values.lName}
+                                        value={values.last_Name}
                                         onChange={handleChange}
                                     />
                                     <button className="Button1" onClick={this.switchModeHandler}>Next Step</button>
@@ -118,10 +127,10 @@ class SignUp extends Component {
                                         <p className='Title1'>SignUp Form</p>
                                         <input
                                             required={true}
-                                            name="phoneNumber"
+                                            name="phone_number"
                                             placeholder="Phone Number"
                                             className="form-control"
-                                            value={values.phoneNumber}
+                                            value={values.phone_number}
                                             onChange={handleChange}
                                         />
                                         <br />
@@ -150,7 +159,7 @@ class SignUp extends Component {
                                                 required={true}
                                                 type="password"
                                                 name="password"
-                                                placeholder="Password"
+                                                placeholder="password"
                                                 className="form-control"
                                                 value={values.password}
                                                 onChange={handleChange}
@@ -162,9 +171,7 @@ class SignUp extends Component {
                                             <br />
                                             <p style={{ textAlign: "center" }}>Already have an account? <Link to="login">LOGIN HERE!</Link></p>
 
-
-
-                                        </div> : null
+                                        </div> : <Redirect to="/login"/>
                             : null}
 
                     </form>
