@@ -28,6 +28,8 @@ function Login2() {
                     .then(response => {
                         console.log(response)
                         if (response.status === 200) {
+                            localStorage.removeItem('token');
+                            localStorage.setItem('token', JSON.stringify(response.data.access_token));
                             navigate("/Dashboard");
                         }
                     });
