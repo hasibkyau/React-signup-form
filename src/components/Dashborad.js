@@ -3,49 +3,40 @@ import axios from 'axios';
 import logo from '../assets/logo.jpg';
 import { Link } from 'react-router-dom';
 import { Table } from 'reactstrap';
-
+import Spinner from '../components/Spinner/Spinner'
+import Details from './Details';
 
 class Dashboard extends Component {
     state = {
         date: [],
         status: ""
     }
-    // GetData = () => {
-    //     const USER_TOKEN = JSON.parse(localStorage.getItem('token'));
-    //     // const USER_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWFpbCI6Imhhc2lia3lhdS5jc2VAZ21haWwuY29tIiwiRmlyc3RfbmFtZSI6IlRlc3QiLCJMYXN0X25hbWUiOiJPbmUiLCJVaWQiOiI2MzhiY2YxNWFiODBiY2I0MTU3NTFmMzkiLCJleHAiOjE2NzAyMTA5NDd9.hHqAdaYOu_7f3Zt55Z_uyrMaUI5Kflp29L0wlD23LDU"
-    //     const URL = "https://test.nexisltd.com/test"
-    //     const AuthStr = 'Bearer ' + USER_TOKEN;
 
-    //     axios.get(URL, { 'headers': { 'Authorization': AuthStr } })
-    //         .then(response => {
-    //             // localStorage.setItem("MyProfile", JSON.stringify(profile[0]))
-    //             console.log(response)
-    //             localStorage.setItem('data', JSON.stringify(response.data));
-    //         });
-    // }
-
+    componentDidMount(){
+        console.log("did mount?")
+        setTimeout(() => {
+            console.log("set time out!");;
+          }, 2000);
+    }
     render() {
-        const USER_TOKEN = JSON.parse(localStorage.getItem('token'));
-        const URL = "https://test.nexisltd.com/test"
-        const AuthStr = 'Bearer ' + USER_TOKEN;
 
-        axios.get(URL, { 'headers': { 'Authorization': AuthStr } })
-            .then(response => {
-                // localStorage.setItem("MyProfile", JSON.stringify(profile[0]))
-                console.log(response)
-                localStorage.removeItem('data');
-                localStorage.setItem('data', JSON.stringify(response.data));
-            });
-
+        console.log("render")
         const list = JSON.parse(localStorage.getItem('data'));
         const employee = list;
+        let DashBoard = null
 
-        return (
-            <div>
+        if (employee === null) {
+            console.log("null")
+            DashBoard = <Spinner />
+        }
+        else {
+            console.log("not null")
+            DashBoard = <div>
                 <img src={logo} alt="Smiley face" width="164.21" height="60" style={{ float: "left" }} />
                 <Link to={'/'} style={{ float: "right" }}>Logout</Link>
                 <br />
                 {/* <div className='d-flex flex-md-row flex-column m-5'> */}
+
 
                 <div className='container'>
                     <br /><br />
@@ -56,9 +47,9 @@ class Dashboard extends Component {
                         <br /><br />
                     </div>
                     <br /><br />
-                    <Table>
-                        <thead>
-                            <tr>
+                    <Table style={{textAlign:"left"}}>
+                        <thead >
+                            <tr >
                                 <th>#</th>
                                 <th>ID</th>
                                 <th>Employee Name</th>
@@ -72,7 +63,7 @@ class Dashboard extends Component {
                         {
                             Object.keys(employee).map((key, index) => {
                                 return (
-                                    <tbody key={index}>
+                                    <tbody  key={index}>
                                         <tr>
                                             <th scope='row'>{index}</th>
                                             <td>{list[key].id}</td>
@@ -90,6 +81,7 @@ class Dashboard extends Component {
                                                     }
                                                 }))
                                             }
+
                                             {
                                                 (Object.keys(list[key].attendance).map((key2, index) => {
 
@@ -100,7 +92,6 @@ class Dashboard extends Component {
                                                     }
                                                 }))
                                             }
-
                                         </tr>
                                     </tbody>
                                 );
@@ -110,7 +101,10 @@ class Dashboard extends Component {
 
                 </div >
             </div>
+        }
 
+        return (
+            <div>{ DashBoard }</div>
         )
     }
 }
