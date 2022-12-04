@@ -37,7 +37,7 @@ const router = createBrowserRouter([
         ),
     },
     {
-        path: "login",
+        path: "/login",
         element: <div>
             <div className='d-flex flex-md-row flex-column m-5'>
                 <div className='col-sm-12 col-md-6 col-lg-7 m-2 BackGround'>
@@ -51,7 +51,7 @@ const router = createBrowserRouter([
         </div>,
     },
     {
-        path:"Dashboard",
+        path:"/Dashboard",
         element: <div><Dashboard/></div>
     }
 ]);
