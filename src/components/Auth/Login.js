@@ -31,7 +31,8 @@ class Login extends Component {
 
                       axios.post('https://test.nexisltd.com/login', values)
                         .then(response => {
-                            console.log(response.status)
+                            console.log(response)
+                            localStorage.setItem('token', JSON.stringify(response.data.access_token));
                             if(response.status === 200){
                                 redirect("/")
                             }
