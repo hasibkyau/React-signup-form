@@ -4,7 +4,6 @@ import logo from '../assets/logo.jpg';
 import { Link } from 'react-router-dom';
 import { Table } from 'reactstrap';
 import Spinner from '../components/Spinner/Spinner'
-import Details from './Details';
 
 class Dashboard extends Component {
     state = {
@@ -12,12 +11,7 @@ class Dashboard extends Component {
         status: ""
     }
 
-    componentDidMount(){
-        console.log("did mount?")
-        setTimeout(() => {
-            console.log("set time out!");;
-          }, 2000);
-    }
+
     render() {
 
         console.log("render")
@@ -31,22 +25,30 @@ class Dashboard extends Component {
         }
         else {
             console.log("not null")
-            DashBoard = <div>
-                <img src={logo} alt="Smiley face" width="164.21" height="60" style={{ float: "left" }} />
-                <Link to={'/'} style={{ float: "right" }}>Logout</Link>
-                <br />
-                {/* <div className='d-flex flex-md-row flex-column m-5'> */}
 
+            DashBoard = <div>
+                {/* Logo */}
+                <img src={logo} alt="Smiley face" width="164.21" height="60" style={{ float: "left" }} />
+                
+                {/* Logout */}
+                <Link to={'/'} style={{ float: "right" }}>Logout</Link>
+                
+                <br />
 
                 <div className='container'>
                     <br /><br />
+
+                    {/* Title */}
                     <div className='row'>
                         <div style={{ width: "480px", height: "72px", borderRadius: "5px", margin: "auto", background: "#1678CB", }}>
                             <h1 style={{ fontSize: "36px", color: "white", paddingTop: "9px" }}>Attendance Information</h1>
                         </div>
                         <br /><br />
                     </div>
+
                     <br /><br />
+
+                    {/* Attendance Table */}
                     <Table style={{textAlign:"left"}}>
                         <thead >
                             <tr >
@@ -61,6 +63,7 @@ class Dashboard extends Component {
                         </thead>
 
                         {
+                            // Extracting the data found from GET request
                             Object.keys(employee).map((key, index) => {
                                 return (
                                     <tbody  key={index}>

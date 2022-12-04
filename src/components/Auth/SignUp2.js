@@ -28,19 +28,24 @@ function SignUp2() {
             (values) => {
                 console.log(values)
 
+                // post Request to SignUP with user Information (values)
                 axios.post('https://test.nexisltd.com/signup', values)
                     .then(response => {
                         console.log(response)
                         if (response.status === 200) {
 
+                            // if the signUp success the post request for Login will start
+                            //values2 contained Login Information
                             const values2 = {
                                 email: values.email,
                                 password: values.password,
                             }
 
+                            // Post request for login
                             axios.post('https://test.nexisltd.com/login', values2)
                                 .then(response2 => {
                                     if (response2.status === 200) {
+                                        // if the login is success, the token will be stored in localstorage and will get the employee information
                                         localStorage.removeItem('token');
                                         localStorage.setItem('token', JSON.stringify(response2.data.access_token));
 
@@ -48,14 +53,19 @@ function SignUp2() {
                                         const URL = "https://test.nexisltd.com/test"
                                         const AuthStr = 'Bearer ' + USER_TOKEN;
 
+                                        // Post request to get the Empoloyee information
                                         axios.get(URL, { 'headers': { 'Authorization': AuthStr } })
                                             .then(response => {
                                                 // localStorage.setItem("MyProfile", JSON.stringify(profile[0]))
+                                                
                                                 console.log(response)
+                                                // Deleting previous data
                                                 localStorage.removeItem('data');
+                                                // Storing the employee information
                                                 localStorage.setItem('data', JSON.stringify(response.data));
                                             });
 
+                                            // waiting for 3 second for fetching the backend data
                                             setTimeout(() => {
                                                 navigate("/Dashboard");  
                                               }, 3000);
@@ -142,6 +152,7 @@ function SignUp2() {
                                     value={values.email}
                                     onChange={handleChange}
                                 />
+                                <span style={{float:"left", fontStyle: "italic", color: "red" }}>{errors.email}</span>
                                 <br />
 
                                 <button className="Button2" onClick={() => setCount(count - 1)}>Back</button>
@@ -164,7 +175,7 @@ function SignUp2() {
                                         value={values.password}
                                         onChange={handleChange}
                                     />
-                                    <span style={{ fontStyle: "italic", color: "black" }}>{errors.password}</span>
+                                    <span style={{float:"left", fontStyle: "italic", color: "red" }}>{errors.password}</span>
                                     <br />
                                     <button className="Button2" onClick={() => setCount(count - 1)}>Back</button>
                                     <button type='submit' className="Button1" >Sign Up</button>
