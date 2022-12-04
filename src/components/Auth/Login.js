@@ -3,19 +3,16 @@ import { Formik } from 'formik';
 import { Alert } from 'reactstrap';
 import { Link, redirect } from 'react-router-dom';
 import Dashboard from '../Dashborad';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 // import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 class Login extends Component {
-    state = {
-        mode: "Login",
-    }
-
 
     render() {
         let err = null;
         let form = null;
+        // const navigate = useNavigate();
 
         form = <Formik
             initialValues={
@@ -29,12 +26,27 @@ class Login extends Component {
                 (values) => {
                     console.log(values)
 
-                      axios.post('https://test.nexisltd.com/login', values)
+                    axios.post('https://test.nexisltd.com/login', values)
                         .then(response => {
                             console.log(response)
-                            localStorage.setItem('token', JSON.stringify(response.data.access_token));
-                            if(response.status === 200){
-                                redirect("/")
+                            if (response.status === 200) {
+
+                                localStorage.removeItem('token');
+                                localStorage.setItem('token', JSON.stringify(response.data.access_token));
+
+                                const USER_TOKEN = JSON.parse(localStorage.getItem('token'));
+                                const URL = "https://test.nexisltd.com/test"
+                                const AuthStr = 'Bearer ' + USER_TOKEN;
+
+                                axios.get(URL, { 'headers': { 'Authorization': AuthStr } })
+                                    .then(response => {
+                                        // localStorage.setItem("MyProfile", JSON.stringify(profile[0]))
+                                        console.log(response)
+                                        localStorage.removeItem('data');
+                                        localStorage.setItem('data', JSON.stringify(response.data));
+                                    });
+
+                                    // navigate("/");
                             }
                         });
 

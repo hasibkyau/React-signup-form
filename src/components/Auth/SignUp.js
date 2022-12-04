@@ -45,13 +45,13 @@ class SignUp extends Component {
                     console.log(values)
                     // this.setState({step: 0})
 
-                    //   axios.post('https://test.nexisltd.com/signup', values)
-                    //     .then(response => {
-                    //         console.log(response.status)
-                    //         if(response.status === 200){
-                    //             redirect("/Dashboard")
-                    //         }
-                    //     });
+                      axios.post('https://test.nexisltd.com/signup', values)
+                        .then(response => {
+                            console.log(response)
+                            if(response.status === 200){
+                                redirect("/login")
+                            }
+                        });
 
                 }
             }
