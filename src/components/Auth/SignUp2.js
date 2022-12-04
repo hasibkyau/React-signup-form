@@ -27,30 +27,43 @@ function SignUp2() {
         onSubmit={
             (values) => {
                 console.log(values)
-                // this.setState({step: 0})
 
                 axios.post('https://test.nexisltd.com/signup', values)
                     .then(response => {
                         console.log(response)
                         if (response.status === 200) {
 
-                           const  values2 = {
-                                    email: values.email,
-                                    password: values.password,
+                            const values2 = {
+                                email: values.email,
+                                password: values.password,
                             }
 
                             axios.post('https://test.nexisltd.com/login', values2)
                                 .then(response2 => {
                                     if (response2.status === 200) {
                                         localStorage.removeItem('token');
-                                        localStorage.setItem('token', JSON.stringify(response.data.access_token));
+                                        localStorage.setItem('token', JSON.stringify(response2.data.access_token));
 
-                                        navigate("/Dashboard")
+                                        const USER_TOKEN = JSON.parse(localStorage.getItem('token'));
+                                        const URL = "https://test.nexisltd.com/test"
+                                        const AuthStr = 'Bearer ' + USER_TOKEN;
+
+                                        axios.get(URL, { 'headers': { 'Authorization': AuthStr } })
+                                            .then(response => {
+                                                // localStorage.setItem("MyProfile", JSON.stringify(profile[0]))
+                                                console.log(response)
+                                                localStorage.removeItem('data');
+                                                localStorage.setItem('data', JSON.stringify(response.data));
+                                            });
+
+                                            setTimeout(() => {
+                                                navigate("/Dashboard");  
+                                              }, 3000);
 
                                     }
                                 })
 
-                            
+
                         }
                     });
 

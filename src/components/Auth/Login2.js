@@ -4,6 +4,7 @@ import { Alert } from 'reactstrap';
 import { Link, redirect } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import Spinner from 'reactstrap';
 
 function Login2() {
 
@@ -23,18 +24,36 @@ function Login2() {
             (values) => {
                 console.log(values)
 
-                const headers = {"Access-Control-Allow-Origin" : "*"}
-                axios.post('https://test.nexisltd.com/login', values, {headers: headers})
+                const headers = { "Access-Control-Allow-Origin": "*" }
+                axios.post('https://test.nexisltd.com/login', values)
                     .then(response => {
                         console.log(response)
                         if (response.status === 200) {
                             localStorage.removeItem('token');
                             localStorage.setItem('token', JSON.stringify(response.data.access_token));
-                            navigate("/Dashboard");
+
+                            const USER_TOKEN = JSON.parse(localStorage.getItem('token'));
+                            const URL = "https://test.nexisltd.com/test"
+                            const AuthStr = 'Bearer ' + USER_TOKEN;
+
+                            axios.get(URL, { 'headers': { 'Authorization': AuthStr } })
+                                .then(response => {
+                                    // localStorage.setItem("MyProfile", JSON.stringify(profile[0]))
+                                    console.log(response)
+                                    localStorage.removeItem('data');
+                                    localStorage.setItem('data', JSON.stringify(response.data));
+                                });
+
+                            console.log("login")
                         }
                     });
-
+                    setTimeout(() => {
+                        navigate("/Dashboard");  
+                      }, 3000);
+                                  
             }
+            
+
         }
 
         validate={(values) => {
