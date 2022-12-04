@@ -1,173 +1,173 @@
-import React, { Component } from 'react';
-import { Formik } from 'formik';
-import { Alert } from 'reactstrap';
-import { Link, redirect } from 'react-router-dom';
-import Dashboard from '../Dashborad';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-// import { redirect } from "react-router-dom";
+// import React, { Component } from 'react';
+// import { Formik } from 'formik';
+// import { Alert } from 'reactstrap';
+// import { Link, redirect } from 'react-router-dom';
+// import Dashboard from '../Dashborad';
+// import { useNavigate } from 'react-router-dom';
+// import axios from 'axios';
+// // import { redirect } from "react-router-dom";
 
-class SignUp extends Component {
-    state = {
-        mode: "Sign Up",
-        step: 1,
-    }
-
-
-    switchModeHandler = () => {
-        // this.setState({ mode: this.state.mode === "Sign Up" ? "Login" : "Sign Up" })
-        this.setState({ step: this.state.step + 1 })
-    }
-
-    switchBack = () => {
-        // this.setState({ mode: this.state.mode === "Sign Up" ? "Login" : "Sign Up" })
-        this.setState({ step: this.state.step - 1 })
-    }
+// class SignUp extends Component {
+//     state = {
+//         mode: "Sign Up",
+//         step: 1,
+//     }
 
 
-    render() {
-        let err = null;
-        let form = null;
+//     switchModeHandler = () => {
+//         // this.setState({ mode: this.state.mode === "Sign Up" ? "Login" : "Sign Up" })
+//         this.setState({ step: this.state.step + 1 })
+//     }
 
-        form = <Formik
-            initialValues={
-                {
-                    first_name: "",
-                    last_Name: "",
-                    phone_number: "",
-                    email: "",
-                    password: "",
-                }
-            }
+//     switchBack = () => {
+//         // this.setState({ mode: this.state.mode === "Sign Up" ? "Login" : "Sign Up" })
+//         this.setState({ step: this.state.step - 1 })
+//     }
 
-            onSubmit={
-                (values) => {
-                    console.log(values)
-                    // this.setState({step: 0})
 
-                      axios.post('https://test.nexisltd.com/signup', values)
-                        .then(response => {
-                            console.log(response)
-                            if(response.status === 200){
-                                redirect("/login")
-                            }
-                        });
+//     render() {
+//         let err = null;
+//         let form = null;
 
-                }
-            }
+//         form = <Formik
+//             initialValues={
+//                 {
+//                     first_name: "",
+//                     last_Name: "",
+//                     phone_number: "",
+//                     email: "",
+//                     password: "",
+//                 }
+//             }
 
-            validate={(values) => {
-                const errors = {};
-                if (!values.email) {
-                    errors.email = 'Required';
-                } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-                    errors.email = 'Invalid email address';
-                }
-                if (!values.password) {
-                    errors.password = 'Required';
-                } else if (values.password.length < 8) {
-                    errors.password = 'Must be atleast 8 characters!';
-                }
-                //console.log("Errors:", errors)
-                return errors;
-            }
-            }>
+//             onSubmit={
+//                 (values) => {
+//                     console.log(values)
+//                     // this.setState({step: 0})
 
-            {
-                ({ values, handleChange, handleSubmit, errors }) => (
+//                       axios.post('https://test.nexisltd.com/signup', values)
+//                         .then(response => {
+//                             console.log(response)
+//                             if(response.status === 200){
+//                                 redirect("/login")
+//                             }
+//                         });
 
-                    <form onSubmit={handleSubmit}>
+//                 }
+//             }
 
-                        {this.state.step === 1 ?
-                            <div>
-                                <p className='Title1'>SignUp Form</p>
-                                <input
-                                    required={true}
-                                    name="first_name"
-                                    placeholder="Write First Name"
-                                    className="form-control"
-                                    value={values.first_name}
-                                    onChange={handleChange}
-                                />
-                                <br />
+//             validate={(values) => {
+//                 const errors = {};
+//                 if (!values.email) {
+//                     errors.email = 'Required';
+//                 } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+//                     errors.email = 'Invalid email address';
+//                 }
+//                 if (!values.password) {
+//                     errors.password = 'Required';
+//                 } else if (values.password.length < 8) {
+//                     errors.password = 'Must be atleast 8 characters!';
+//                 }
+//                 //console.log("Errors:", errors)
+//                 return errors;
+//             }
+//             }>
 
-                                <input
-                                    required={true}
-                                    name="last_Name"
-                                    placeholder="Write Last Name"
-                                    className="form-control"
-                                    value={values.last_Name}
-                                    onChange={handleChange}
-                                />
-                                <button className="Button1" onClick={this.switchModeHandler}>Next Step</button>
-                                <br />
-                                <p style={{ textAlign: "center" }}>Already have an account? <Link to="login">LOGIN HERE!</Link></p>
-                                <br />
+//             {
+//                 ({ values, handleChange, handleSubmit, errors }) => (
 
-                            </div> :
-                            this.state.step === 2 ?
-                                <div>
-                                    <p className='Title1'>SignUp Form</p>
-                                    <input
-                                        required={true}
-                                        name="phone_number"
-                                        placeholder="Phone Number"
-                                        className="form-control"
-                                        value={values.phone_number}
-                                        onChange={handleChange}
-                                    />
-                                    <br />
+//                     <form onSubmit={handleSubmit}>
 
-                                    <input
-                                        required={true}
-                                        name="email"
-                                        placeholder="Enter Your Email"
-                                        className="form-control"
-                                        value={values.email}
-                                        onChange={handleChange}
-                                    />
-                                    <br />
+//                         {this.state.step === 1 ?
+//                             <div>
+//                                 <p className='Title1'>SignUp Form</p>
+//                                 <input
+//                                     required={true}
+//                                     name="first_name"
+//                                     placeholder="Write First Name"
+//                                     className="form-control"
+//                                     value={values.first_name}
+//                                     onChange={handleChange}
+//                                 />
+//                                 <br />
 
-                                    <button className="Button2" onClick={this.switchBack}>Back</button>
-                                    <button className="Button1" onClick={this.switchModeHandler}>Next Step</button>
+//                                 <input
+//                                     required={true}
+//                                     name="last_Name"
+//                                     placeholder="Write Last Name"
+//                                     className="form-control"
+//                                     value={values.last_Name}
+//                                     onChange={handleChange}
+//                                 />
+//                                 <button className="Button1" onClick={this.switchModeHandler}>Next Step</button>
+//                                 <br />
+//                                 <p style={{ textAlign: "center" }}>Already have an account? <Link to="login">LOGIN HERE!</Link></p>
+//                                 <br />
 
-                                    <br />
-                                    <p style={{ textAlign: "center" }}>Already have an account? <Link to="login">LOGIN HERE!</Link></p>
+//                             </div> :
+//                             this.state.step === 2 ?
+//                                 <div>
+//                                     <p className='Title1'>SignUp Form</p>
+//                                     <input
+//                                         required={true}
+//                                         name="phone_number"
+//                                         placeholder="Phone Number"
+//                                         className="form-control"
+//                                         value={values.phone_number}
+//                                         onChange={handleChange}
+//                                     />
+//                                     <br />
 
-                                </div> :
-                                this.state.step === 3 ?
-                                    <div>
-                                        <p className='Title1'>SignUp Form</p>
-                                        <input
-                                            required={true}
-                                            type="password"
-                                            name="password"
-                                            placeholder="password"
-                                            className="form-control"
-                                            value={values.password}
-                                            onChange={handleChange}
-                                        />
-                                        <span style={{textAlign:'left', fontStyle: "italic", color: "black" }}>{errors.password}</span>
-                                        <br />
-                                        <button className="Button2" onClick={this.switchBack}>Back</button>
-                                        <button type='submit' className="Button1" >Sign Up</button>
-                                        <br />
-                                        <p style={{ textAlign: "center" }}>Already have an account? <Link to="login">LOGIN HERE!</Link></p>
+//                                     <input
+//                                         required={true}
+//                                         name="email"
+//                                         placeholder="Enter Your Email"
+//                                         className="form-control"
+//                                         value={values.email}
+//                                         onChange={handleChange}
+//                                     />
+//                                     <br />
 
-                                    </div> : null}
+//                                     <button className="Button2" onClick={this.switchBack}>Back</button>
+//                                     <button className="Button1" onClick={this.switchModeHandler}>Next Step</button>
 
-                    </form>
-                )
-            }
-        </Formik >
+//                                     <br />
+//                                     <p style={{ textAlign: "center" }}>Already have an account? <Link to="login">LOGIN HERE!</Link></p>
 
-        return (
-            <div>
-                {err}
-                {form}
-            </div >
-        )
-    }
-}
+//                                 </div> :
+//                                 this.state.step === 3 ?
+//                                     <div>
+//                                         <p className='Title1'>SignUp Form</p>
+//                                         <input
+//                                             required={true}
+//                                             type="password"
+//                                             name="password"
+//                                             placeholder="password"
+//                                             className="form-control"
+//                                             value={values.password}
+//                                             onChange={handleChange}
+//                                         />
+//                                         <span style={{textAlign:'left', fontStyle: "italic", color: "black" }}>{errors.password}</span>
+//                                         <br />
+//                                         <button className="Button2" onClick={this.switchBack}>Back</button>
+//                                         <button type='submit' className="Button1" >Sign Up</button>
+//                                         <br />
+//                                         <p style={{ textAlign: "center" }}>Already have an account? <Link to="login">LOGIN HERE!</Link></p>
 
-export default SignUp;
+//                                     </div> : null}
+
+//                     </form>
+//                 )
+//             }
+//         </Formik >
+
+//         return (
+//             <div>
+//                 {err}
+//                 {form}
+//             </div >
+//         )
+//     }
+// }
+
+// export default SignUp;

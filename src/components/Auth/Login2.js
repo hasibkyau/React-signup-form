@@ -24,29 +24,40 @@ function Login2() {
             (values) => {
                 console.log(values)
 
-                const headers = { "Access-Control-Allow-Origin": "*" }
+                // Post request with Login API
                 axios.post('https://test.nexisltd.com/login', values)
                     .then(response => {
                         console.log(response)
+                        
                         if (response.status === 200) {
+                            // Deleting previous data
                             localStorage.removeItem('token');
+                            // Storing the token data to lcalstorage
                             localStorage.setItem('token', JSON.stringify(response.data.access_token));
 
                             const USER_TOKEN = JSON.parse(localStorage.getItem('token'));
+
+                            // API
                             const URL = "https://test.nexisltd.com/test"
                             const AuthStr = 'Bearer ' + USER_TOKEN;
 
+                            // GET request with Bearer Token to get the Employee information from the BackEnd
                             axios.get(URL, { 'headers': { 'Authorization': AuthStr } })
                                 .then(response => {
-                                    // localStorage.setItem("MyProfile", JSON.stringify(profile[0]))
                                     console.log(response)
+
+                                    // Removing previous data
                                     localStorage.removeItem('data');
+
+                                    // Storing the Employee data from Backend to local storate
                                     localStorage.setItem('data', JSON.stringify(response.data));
                                 });
 
                             console.log("login")
                         }
                     });
+
+                    // wating for 3 second for fetching the data from server
                     setTimeout(() => {
                         navigate("/Dashboard");  
                       }, 3000);
