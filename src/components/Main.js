@@ -61,11 +61,12 @@ const router = createBrowserRouter([
 function Main() {
     return (
         <div>
-            {
+            <RouterProvider router={router} />
+            {/* {
                 createRoot(document.getElementById("root")).render(
                     <RouterProvider router={router} />
                 )
-            }
+            } */}
         </div>
     )
 }
