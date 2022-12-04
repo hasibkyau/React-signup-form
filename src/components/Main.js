@@ -32,7 +32,6 @@ const router = createBrowserRouter([
                         <SignUp2 />
                     </div>
                 </div>
-                <Link to={'/Dashboard'}>Dashboard</Link>
             </div>
 
         ),

@@ -147,7 +147,7 @@ class SignUp extends Component {
                                             value={values.password}
                                             onChange={handleChange}
                                         />
-                                        <span style={{ fontStyle: "italic", color: "black" }}>{errors.password}</span>
+                                        <span style={{textAlign:'left', fontStyle: "italic", color: "black" }}>{errors.password}</span>
                                         <br />
                                         <button className="Button2" onClick={this.switchBack}>Back</button>
                                         <button type='submit' className="Button1" >Sign Up</button>

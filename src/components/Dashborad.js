@@ -4,7 +4,6 @@ import logo from '../assets/logo.jpg';
 import { Link } from 'react-router-dom';
 import { Table } from 'reactstrap';
 import Spinner from '../components/Spinner/Spinner'
-import Details from './Details';
 
 class Dashboard extends Component {
     state = {

@@ -142,6 +142,7 @@ function SignUp2() {
                                     value={values.email}
                                     onChange={handleChange}
                                 />
+                                <span style={{float:"left", fontStyle: "italic", color: "red" }}>{errors.email}</span>
                                 <br />
 
                                 <button className="Button2" onClick={() => setCount(count - 1)}>Back</button>
@@ -164,7 +165,7 @@ function SignUp2() {
                                         value={values.password}
                                         onChange={handleChange}
                                     />
-                                    <span style={{ fontStyle: "italic", color: "black" }}>{errors.password}</span>
+                                    <span style={{float:"left", fontStyle: "italic", color: "red" }}>{errors.password}</span>
                                     <br />
                                     <button className="Button2" onClick={() => setCount(count - 1)}>Back</button>
                                     <button type='submit' className="Button1" >Sign Up</button>
