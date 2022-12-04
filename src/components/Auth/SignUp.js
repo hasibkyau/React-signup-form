@@ -47,9 +47,9 @@ class SignUp extends Component {
 
                       axios.post('https://test.nexisltd.com/signup', values)
                         .then(response => {
-                            console.log(response.status)
+                            console.log(response)
                             if(response.status === 200){
-                                redirect("/Dashboard")
+                                redirect("/login")
                             }
                         });
 

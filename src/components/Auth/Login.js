@@ -3,19 +3,16 @@ import { Formik } from 'formik';
 import { Alert } from 'reactstrap';
 import { Link, redirect } from 'react-router-dom';
 import Dashboard from '../Dashborad';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 // import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 class Login extends Component {
-    state = {
-        mode: "Login",
-    }
-
 
     render() {
         let err = null;
         let form = null;
+        // const navigate = useNavigate();
 
         form = <Formik
             initialValues={
@@ -33,6 +30,7 @@ class Login extends Component {
                         .then(response => {
                             console.log(response)
                             if (response.status === 200) {
+
                                 localStorage.removeItem('token');
                                 localStorage.setItem('token', JSON.stringify(response.data.access_token));
 
@@ -48,7 +46,7 @@ class Login extends Component {
                                         localStorage.setItem('data', JSON.stringify(response.data));
                                     });
 
-                                redirect("/")
+                                    // navigate("/");
                             }
                         });
 

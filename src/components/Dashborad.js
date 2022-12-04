@@ -25,6 +25,17 @@ class Dashboard extends Component {
     // }
 
     render() {
+        const USER_TOKEN = JSON.parse(localStorage.getItem('token'));
+        const URL = "https://test.nexisltd.com/test"
+        const AuthStr = 'Bearer ' + USER_TOKEN;
+
+        axios.get(URL, { 'headers': { 'Authorization': AuthStr } })
+            .then(response => {
+                // localStorage.setItem("MyProfile", JSON.stringify(profile[0]))
+                console.log(response)
+                localStorage.removeItem('data');
+                localStorage.setItem('data', JSON.stringify(response.data));
+            });
 
         const list = JSON.parse(localStorage.getItem('data'));
         const employee = list;
@@ -32,6 +43,7 @@ class Dashboard extends Component {
         return (
             <div>
                 <img src={logo} alt="Smiley face" width="164.21" height="60" style={{ float: "left" }} />
+                <Link to={'/'} style={{ float: "right" }}>Logout</Link>
                 <br />
                 {/* <div className='d-flex flex-md-row flex-column m-5'> */}
 
@@ -41,12 +53,9 @@ class Dashboard extends Component {
                         <div style={{ width: "480px", height: "72px", borderRadius: "5px", margin: "auto", background: "#1678CB", }}>
                             <h1 style={{ fontSize: "36px", color: "white", paddingTop: "9px" }}>Attendance Information</h1>
                         </div>
-                        <br/><br/>
+                        <br /><br />
                     </div>
-
-
-                    {/* <button className="Button1" onClick={this.GetData}>Get Data</button> */}
-
+                    <br /><br />
                     <Table>
                         <thead>
                             <tr>
@@ -73,25 +82,25 @@ class Dashboard extends Component {
                                             {
                                                 (Object.keys(list[key].attendance).map((key2, index) => {
 
-                                                    if (index === 29) {
+                                                    if (index === 26) {
                                                         // console.log(list[key].attendance[key2].status)
                                                         return (
-                                                        <th key={index}>{key2}</th>
+                                                            <th key={index}>{key2}</th>
                                                         )
                                                     }
                                                 }))
                                             }
-                                                   {
+                                            {
                                                 (Object.keys(list[key].attendance).map((key2, index) => {
 
-                                                    if (index === 29) {
+                                                    if (index === 26) {
                                                         // console.log(list[key].attendance[key2].status)
                                                         return (
-                                                        <th key={index}>{list[key].attendance[key2].status}</th>)
+                                                            <th key={index}>{list[key].attendance[key2].status}</th>)
                                                     }
                                                 }))
                                             }
-                                            
+
                                         </tr>
                                     </tbody>
                                 );
@@ -100,7 +109,6 @@ class Dashboard extends Component {
                     </Table>
 
                 </div >
-                <Link to={'/'}>Logout</Link>
             </div>
 
         )
