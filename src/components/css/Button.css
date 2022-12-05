@@ -1,0 +1,98 @@
+.arrow-button {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+
+    background: #1678CB;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    border: #FFFFFF;
+    color: white;
+    /* padding: 10px 16px; */
+    padding: 15px 20px;
+    transition: all .3s ease;
+    font-weight: bold;
+    cursor: pointer;
+    align-items: center;
+    font-size: 14px;
+}
+
+.arrow-button > .arrow {
+    width: 6px;
+    height: 6px;
+    border-right: 2px solid #C2FFE9;
+    border-bottom: 2px solid #C2FFE9;
+    position: relative;
+    transform: rotate(-45deg);
+    margin: 0 6px;
+    transition: all .3s ease;
+}
+
+.arrow-button > .arrow::before {
+    display: block;
+    background-color: currentColor;
+    width: 3px;
+    transform-origin: bottom right;
+    height: 2px;
+    position: absolute;
+    opacity: 0;
+    bottom: calc(-2px / 2);
+    transform: rotate(45deg);
+    transition: all .3s ease;
+    content: "";
+    right: 0;
+}
+
+.arrow-button:hover > .arrow {
+    transform: rotate(-45deg) translate(4px, 4px);
+    border-color: text-hover-color;
+    border-right: 2px solid #1678CB;
+    border-bottom: 2px solid #1678CB;
+}
+
+.arrow-button:hover > .arrow::before {
+    opacity: 1;
+    width: 8px;
+}
+
+.arrow-button:hover {
+    background-color: #FFFFFF;
+    color: #1678CB;
+    border: 2px solid #1678CB;
+}
+
+.backButton{
+    display: inline;
+    align-items: center;
+    padding: 10px;
+    background: white;
+    border: #FFFFFF;
+    color: #767676;
+}
+
+
+.loginButton {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+
+    background: #1678CB;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    border: #FFFFFF;
+    color: white;
+    /* padding: 10px 16px; */
+    padding: 15px 20px;
+    transition: all .3s ease;
+    font-weight: bold;
+    cursor: pointer;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.loginButton:hover {
+    background-color: white;
+    color:#1678CB;
+    border: 1px solid #1678CB;
+}

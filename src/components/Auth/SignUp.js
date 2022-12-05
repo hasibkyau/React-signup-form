@@ -9,6 +9,8 @@ import axios from 'axios';
 import { auth } from './actionCreators';
 import { connect } from 'react-redux';
 import { Navigate } from 'react-router-dom';
+import '../css/Button.css'
+
 
 
 
@@ -37,12 +39,9 @@ function SignUp() {
             (values) => {
 
                 auth(values, mode);
-                
                 setTimeout(() => {
-                    navigate("dashboard");  
-                  }, 3000);
-                
-
+                    navigate("dashboard");
+                }, 3000);
 
             }
         }
@@ -71,7 +70,7 @@ function SignUp() {
                     {mode === "Sign Up" ?
                         count === 1 ?
                             <div>
-                                <p className='Title1'>SignUp Form</p>
+                                <p className='Title1'>SignUp Form </p>
                                 <input
                                     required={true}
                                     name="first_name"
@@ -90,9 +89,10 @@ function SignUp() {
                                     value={values.last_Name}
                                     onChange={handleChange}
                                 />
-                                <button className="Button1" onClick={() => setCount(count - 1)}>Next Step</button>
-                                <br />
-                                <p style={{ textAlign: "center" }}>Already have an account? <Link onClick={() => setMode("Login")}>LOGIN HERE!</Link></p>
+                                <br /><br />
+                                <button className="arrow-button" onClick={() => setCount(count + 1)}>Next Step<span className="arrow"></span></button>
+                                <br /><br /><br />
+                                <p style={{ textAlign: "center" }}>Already have an account? <b style={{ cursor: "pointer", color: "#1678CB", textDecoration: "underline" }} onClick={() => setMode("Login")}>LOGIN HERE!</b></p>
                                 <br />
 
                             </div> :
@@ -118,13 +118,18 @@ function SignUp() {
                                         value={values.email}
                                         onChange={handleChange}
                                     />
-                                    <br />
 
-                                    <button className="Button2" onClick={() => setCount(count - 1)}>Back</button>
-                                    <button className="Button1" onClick={() => setCount(count + 1)}>Next Step</button>
+                                    <br /><br />
 
+                                    <div className='container'>
+                                        <div className='row'>
+                                            <div className='col-2'><button className="backButton" onClick={() => setCount(count - 1)}>Back</button></div>
+                                            <div className='col-8'><button className="arrow-button" onClick={() => setCount(count + 1)}>Next Step<span className="arrow"></span></button></div>
+                                        </div>
+                                    </div>
+                                    <br /><br /><br />
+                                    <p style={{ textAlign: "center" }}>Already have an account? <b style={{ cursor: "pointer", color: "#1678CB", textDecoration: "underline" }} onClick={() => setMode("Login")}>LOGIN HERE!</b></p>
                                     <br />
-                                    <p style={{ textAlign: "center" }}>Already have an account? <Link onClick={() => setMode("Login")}>LOGIN HERE!</Link></p>
 
                                 </div> :
                                 count === 3 ?
@@ -139,13 +144,18 @@ function SignUp() {
                                             value={values.password}
                                             onChange={handleChange}
                                         />
-                                        <span style={{ textAlign: 'left', fontStyle: "italic", color: "black" }}>{errors.password}</span>
-                                        <br />
-                                        <button className="Button2" onClick={() => setCount(count - 1)}>Back</button>
-                                        <button type='submit' className="Button1" >Sign Up</button>
-                                        <br />
-                                        <p style={{ textAlign: "center" }}>Already have an account? <Link onClick={this.switchModeHandler}>LOGIN HERE!</Link></p>
+                                        <span style={{ float: "left", paddingLeft: '5px', textAlign: 'left', fontStyle: "italic", color: "black" }}>{errors.password}</span>
+                                        <br /><br />
 
+                                        <div className='container'>
+                                            <div className='row'>
+                                                <div className='col-2'><button className="backButton" onClick={() => setCount(count - 1)}>Back</button></div>
+                                                <div className='col-8'><button className="arrow-button" type='submit'>Sign Up<span className="arrow"></span></button></div>
+                                            </div>
+                                        </div>
+                                        <br /><br /><br />
+                                        <p style={{ textAlign: "center" }}>Already have an account? <b style={{ cursor: "pointer", color: "#1678CB", textDecoration: "underline" }} onClick={() => setMode("Login")}>LOGIN HERE!</b></p>
+                                        <br />
                                     </div> : null
                         : <div>
                             <p className='Title1'>Log In Form</p>
@@ -168,10 +178,14 @@ function SignUp() {
                                 value={values.password}
                                 onChange={handleChange}
                             />
-                            <span style={{ fontStyle: "italic", color: "black" }}>{errors.password}</span>
-                            <button type='submit' className="Button1" >Login</button>
-                            <br />
-                            <p style={{ textAlign: "center" }}>Don't have an account? <Link onClick={() => setMode("Sign Up")}>SIGN UP HERE!</Link></p>
+                            <span style={{ float: "left", paddingLeft: '5px', textAlign: 'left', color: "black" }}>{errors.password}</span>
+                            <br/><br/>
+                            <div>
+                                <button className="loginButton" type='submit'>Login<span className ="arrow"></span></button>
+                                <br /><br /><br />
+                                <p style={{ textAlign: "center" }}>Don't have an account? <b style={{ cursor: "pointer", color: "#1678CB", textDecoration: "underline" }} onClick={() => setMode("Sign Up")}>SIGN UP HERE!</b></p>
+                                <br />
+                            </div>
                         </div>}
                     {/* {this.state.dashboard === true ? <Navigate to="/Dashboard" replace={true} /> : console.log("render")} */}
                 </form>
