@@ -1,173 +1,207 @@
-// import React, { Component } from 'react';
-// import { Formik } from 'formik';
-// import { Alert } from 'reactstrap';
-// import { Link, redirect } from 'react-router-dom';
-// import Dashboard from '../Dashborad';
-// import { useNavigate } from 'react-router-dom';
-// import axios from 'axios';
-// // import { redirect } from "react-router-dom";
-
-// class SignUp extends Component {
-//     state = {
-//         mode: "Sign Up",
-//         step: 1,
-//     }
+import React, { Component, useState } from 'react';
+import { Formik } from 'formik';
+import { Alert } from 'reactstrap';
+import { Link, redirect, useLocation } from 'react-router-dom';
+import Dashboard from '../Dashborad';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+// import { redirect } from "react-router-dom";
+import { auth } from './actionCreators';
+import { connect } from 'react-redux';
+import { Navigate } from 'react-router-dom';
+import '../css/Button.css'
 
 
-//     switchModeHandler = () => {
-//         // this.setState({ mode: this.state.mode === "Sign Up" ? "Login" : "Sign Up" })
-//         this.setState({ step: this.state.step + 1 })
-//     }
-
-//     switchBack = () => {
-//         // this.setState({ mode: this.state.mode === "Sign Up" ? "Login" : "Sign Up" })
-//         this.setState({ step: this.state.step - 1 })
-//     }
 
 
-//     render() {
-//         let err = null;
-//         let form = null;
+function SignUp() {
 
-//         form = <Formik
-//             initialValues={
-//                 {
-//                     first_name: "",
-//                     last_Name: "",
-//                     phone_number: "",
-//                     email: "",
-//                     password: "",
-//                 }
-//             }
+    const [count, setCount] = useState(1);
+    const [mode, setMode] = useState("Sign Up");
+    const navigate = useNavigate();
 
-//             onSubmit={
-//                 (values) => {
-//                     console.log(values)
-//                     // this.setState({step: 0})
+    let err = null;
+    let form = null;
 
-//                       axios.post('https://test.nexisltd.com/signup', values)
-//                         .then(response => {
-//                             console.log(response)
-//                             if(response.status === 200){
-//                                 redirect("/login")
-//                             }
-//                         });
 
-//                 }
-//             }
+    form = <Formik
+        initialValues={
+            {
+                first_name: "",
+                last_Name: "",
+                phone_number: "",
+                email: "",
+                password: "",
+            }
+        }
 
-//             validate={(values) => {
-//                 const errors = {};
-//                 if (!values.email) {
-//                     errors.email = 'Required';
-//                 } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-//                     errors.email = 'Invalid email address';
-//                 }
-//                 if (!values.password) {
-//                     errors.password = 'Required';
-//                 } else if (values.password.length < 8) {
-//                     errors.password = 'Must be atleast 8 characters!';
-//                 }
-//                 //console.log("Errors:", errors)
-//                 return errors;
-//             }
-//             }>
+        onSubmit={
+            (values) => {
 
-//             {
-//                 ({ values, handleChange, handleSubmit, errors }) => (
+                auth(values, mode);
+                setTimeout(() => {
+                    navigate("dashboard");
+                }, 3000);
 
-//                     <form onSubmit={handleSubmit}>
+            }
+        }
 
-//                         {this.state.step === 1 ?
-//                             <div>
-//                                 <p className='Title1'>SignUp Form</p>
-//                                 <input
-//                                     required={true}
-//                                     name="first_name"
-//                                     placeholder="Write First Name"
-//                                     className="form-control"
-//                                     value={values.first_name}
-//                                     onChange={handleChange}
-//                                 />
-//                                 <br />
+        validate={(values) => {
+            const errors = {};
+            if (!values.email) {
+                errors.email = 'Required';
+            } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+                errors.email = 'Invalid email address';
+            }
+            if (!values.password) {
+                errors.password = 'Required';
+            } else if (values.password.length < 8) {
+                errors.password = 'Must be atleast 8 characters!';
+            }
+            //console.log("Errors:", errors)
+            return errors;
+        }
+        }>
 
-//                                 <input
-//                                     required={true}
-//                                     name="last_Name"
-//                                     placeholder="Write Last Name"
-//                                     className="form-control"
-//                                     value={values.last_Name}
-//                                     onChange={handleChange}
-//                                 />
-//                                 <button className="Button1" onClick={this.switchModeHandler}>Next Step</button>
-//                                 <br />
-//                                 <p style={{ textAlign: "center" }}>Already have an account? <Link to="login">LOGIN HERE!</Link></p>
-//                                 <br />
+        {
+            ({ values, handleChange, handleSubmit, errors }) => (
 
-//                             </div> :
-//                             this.state.step === 2 ?
-//                                 <div>
-//                                     <p className='Title1'>SignUp Form</p>
-//                                     <input
-//                                         required={true}
-//                                         name="phone_number"
-//                                         placeholder="Phone Number"
-//                                         className="form-control"
-//                                         value={values.phone_number}
-//                                         onChange={handleChange}
-//                                     />
-//                                     <br />
+                <form onSubmit={handleSubmit}>
+                    {mode === "Sign Up" ?
+                        count === 1 ?
+                            <div>
+                                <p className='Title1'>SignUp Form </p>
+                                <input
+                                    required={true}
+                                    name="first_name"
+                                    placeholder="Write First Name"
+                                    className="form-control"
+                                    value={values.first_name}
+                                    onChange={handleChange}
+                                />
+                                <br />
 
-//                                     <input
-//                                         required={true}
-//                                         name="email"
-//                                         placeholder="Enter Your Email"
-//                                         className="form-control"
-//                                         value={values.email}
-//                                         onChange={handleChange}
-//                                     />
-//                                     <br />
+                                <input
+                                    required={true}
+                                    name="last_Name"
+                                    placeholder="Write Last Name"
+                                    className="form-control"
+                                    value={values.last_Name}
+                                    onChange={handleChange}
+                                />
+                                <br /><br />
+                                <button className="arrow-button" onClick={() => setCount(count + 1)}>Next Step<span className="arrow"></span></button>
+                                <br /><br /><br />
+                                <p style={{ textAlign: "center" }}>Already have an account? <b style={{ cursor: "pointer", color: "#1678CB", textDecoration: "underline" }} onClick={() => setMode("Login")}>LOGIN HERE!</b></p>
+                                <br />
 
-//                                     <button className="Button2" onClick={this.switchBack}>Back</button>
-//                                     <button className="Button1" onClick={this.switchModeHandler}>Next Step</button>
+                            </div> :
+                            count === 2 ?
+                                <div>
 
-//                                     <br />
-//                                     <p style={{ textAlign: "center" }}>Already have an account? <Link to="login">LOGIN HERE!</Link></p>
+                                    <p className='Title1'>SignUp Form</p>
+                                    <input
+                                        required={true}
+                                        name="phone_number"
+                                        placeholder="Phone Number"
+                                        className="form-control"
+                                        value={values.phone_number}
+                                        onChange={handleChange}
+                                    />
+                                    <br />
 
-//                                 </div> :
-//                                 this.state.step === 3 ?
-//                                     <div>
-//                                         <p className='Title1'>SignUp Form</p>
-//                                         <input
-//                                             required={true}
-//                                             type="password"
-//                                             name="password"
-//                                             placeholder="password"
-//                                             className="form-control"
-//                                             value={values.password}
-//                                             onChange={handleChange}
-//                                         />
-//                                         <span style={{textAlign:'left', fontStyle: "italic", color: "black" }}>{errors.password}</span>
-//                                         <br />
-//                                         <button className="Button2" onClick={this.switchBack}>Back</button>
-//                                         <button type='submit' className="Button1" >Sign Up</button>
-//                                         <br />
-//                                         <p style={{ textAlign: "center" }}>Already have an account? <Link to="login">LOGIN HERE!</Link></p>
+                                    <input
+                                        required={true}
+                                        name="email"
+                                        placeholder="Enter Your Email"
+                                        className="form-control"
+                                        value={values.email}
+                                        onChange={handleChange}
+                                    />
 
-//                                     </div> : null}
+                                    <br /><br />
 
-//                     </form>
-//                 )
-//             }
-//         </Formik >
+                                    <div className='container'>
+                                        <div className='row'>
+                                            <div className='col-2'><button className="backButton" onClick={() => setCount(count - 1)}>Back</button></div>
+                                            <div className='col-8'><button className="arrow-button" onClick={() => setCount(count + 1)}>Next Step<span className="arrow"></span></button></div>
+                                        </div>
+                                    </div>
+                                    <br /><br /><br />
+                                    <p style={{ textAlign: "center" }}>Already have an account? <b style={{ cursor: "pointer", color: "#1678CB", textDecoration: "underline" }} onClick={() => setMode("Login")}>LOGIN HERE!</b></p>
+                                    <br />
 
-//         return (
-//             <div>
-//                 {err}
-//                 {form}
-//             </div >
-//         )
-//     }
-// }
+                                </div> :
+                                count === 3 ?
+                                    <div>
+                                        <p className='Title1'>SignUp Form</p>
+                                        <input
+                                            required={true}
+                                            type="password"
+                                            name="password"
+                                            placeholder="password"
+                                            className="form-control"
+                                            value={values.password}
+                                            onChange={handleChange}
+                                        />
+                                        <span style={{ float: "left", paddingLeft: '5px', textAlign: 'left', fontStyle: "italic", color: "black" }}>{errors.password}</span>
+                                        <br /><br />
 
-// export default SignUp;
+                                        <div className='container'>
+                                            <div className='row'>
+                                                <div className='col-2'><button className="backButton" onClick={() => setCount(count - 1)}>Back</button></div>
+                                                <div className='col-8'><button className="arrow-button" type='submit'>Sign Up<span className="arrow"></span></button></div>
+                                            </div>
+                                        </div>
+                                        <br /><br /><br />
+                                        <p style={{ textAlign: "center" }}>Already have an account? <b style={{ cursor: "pointer", color: "#1678CB", textDecoration: "underline" }} onClick={() => setMode("Login")}>LOGIN HERE!</b></p>
+                                        <br />
+                                    </div> : null
+                        : <div>
+                            <p className='Title1'>Log In Form</p>
+
+                            <input
+                                required={true}
+                                name="email"
+                                placeholder="Enter Your Email"
+                                className="form-control"
+                                value={values.email}
+                                onChange={handleChange}
+                            />
+                            <br />
+                            <input
+                                required={true}
+                                type="password"
+                                name="password"
+                                placeholder="password"
+                                className="form-control"
+                                value={values.password}
+                                onChange={handleChange}
+                            />
+                            <span style={{ float: "left", paddingLeft: '5px', textAlign: 'left', color: "black" }}>{errors.password}</span>
+                            <br/><br/>
+                            <div>
+                                <button className="loginButton" type='submit'>Login<span className ="arrow"></span></button>
+                                <br /><br /><br />
+                                <p style={{ textAlign: "center" }}>Don't have an account? <b style={{ cursor: "pointer", color: "#1678CB", textDecoration: "underline" }} onClick={() => setMode("Sign Up")}>SIGN UP HERE!</b></p>
+                                <br />
+                            </div>
+                        </div>}
+                    {/* {this.state.dashboard === true ? <Navigate to="/Dashboard" replace={true} /> : console.log("render")} */}
+                </form>
+            )
+        }
+    </Formik >
+
+    return (
+        <div>
+            {err}
+            {form}
+        </div >
+    )
+
+}
+
+export default SignUp;
+
+// export default connect('', mapDispatchToProps)(SignUp);
