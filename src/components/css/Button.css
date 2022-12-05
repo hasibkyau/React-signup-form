@@ -65,10 +65,11 @@
     display: inline;
     align-items: center;
     padding: 10px;
-    padding-left: 54px;
-    /* margin-left: 54px; */
+    /* padding-left: 54px; */
+    margin-left: 54px;
     background: #FFFFFF;
-    border: #FFFFFF;
+    /* border: 2px solid red; */
+    border: white;
     color: #767676;
 }
 

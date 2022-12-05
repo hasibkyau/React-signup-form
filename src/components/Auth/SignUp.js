@@ -115,8 +115,8 @@ function SignUp() {
 
                                     <div className='container'>
                                         <div className='row'>
-                                            <div className='col-2'><button className="backButton" onClick={() => setCount(count - 1)}>Back</button></div>
-                                            <div className='col-8'><button className="arrow-button" onClick={() => setCount(count + 1)}>Next Step<span className="arrow"></span></button></div>
+                                            <div className='col-4'><button className="backButton" onClick={() => setCount(count - 1)}>Back</button></div>
+                                            <div className='col-4'><button className="arrow-button" onClick={() => setCount(count + 1)}>Next Step<span className="arrow"></span></button></div>
                                         </div>
                                     </div>
                                     <br /><br /><br /><br />
@@ -136,13 +136,14 @@ function SignUp() {
                                             value={values.password}
                                             onChange={handleChange}
                                         />
-                                        <span style={{ float: "left", paddingLeft: '5px', textAlign: 'left', fontStyle: "italic", color: "black" }}>{errors.password}</span>
+                                        <br/>
+                                        <span style={{  paddingLeft: '5px', textAlign: 'left', fontStyle: "italic", color: "black" }}>{errors.password}</span>
                                         <br /><br /><br />
 
                                         <div className='container'>
                                             <div className='row'>
-                                                <div className='col-2'><button className="backButton" onClick={() => setCount(count - 1)}>Back</button></div>
-                                                <div className='col-8'><button className="arrow-button" type='submit'>Sign Up<span className="arrow"></span></button></div>
+                                                <div className='col-4'><button className="backButton" onClick={() => setCount(count - 1)}>Back</button></div>
+                                                <div className='col-4'><button className="arrow-button" type='submit'>Sign Up<span className="arrow"></span></button></div>
                                             </div>
                                         </div>
                                         <br /><br /><br /><br /><br /><br /><br /><br />
