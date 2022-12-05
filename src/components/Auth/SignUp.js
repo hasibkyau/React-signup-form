@@ -174,10 +174,10 @@ function SignUp() {
                                 onChange={handleChange}
                             />
                             <span style={{ float: "left", paddingLeft: '5px', textAlign: 'left', color: "black" }}>{errors.password}</span>
-                            <br/><br/>
+                            <br/><br/><br />
                             <div>
                                 <button className="loginButton" type='submit'>Login<span className ="arrow"></span></button>
-                                <br /><br /><br />
+                                <br /><br /><br /><br />
                                 <p style={{ textAlign: "center" }}>Don't have an account? <b style={{ cursor: "pointer", color: "#1678CB", textDecoration: "underline" }} onClick={() => setMode("Sign Up")}>SIGN UP HERE!</b></p>
                                 <br />
                             </div>
