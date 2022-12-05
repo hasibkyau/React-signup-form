@@ -173,7 +173,8 @@ function SignUp() {
                                 value={values.password}
                                 onChange={handleChange}
                             />
-                            <span style={{ float: "left", paddingLeft: '5px', textAlign: 'left', color: "black" }}>{errors.password}</span>
+                            <br/>
+                            <span style={{ paddingLeft: '5px', textAlign: 'center', color: "black" }}>{errors.password}</span>
                             <br/><br/><br />
                             <div>
                                 <button className="loginButton" type='submit'>Login<span className ="arrow"></span></button>
