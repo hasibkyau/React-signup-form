@@ -9,6 +9,7 @@ import axios from 'axios';
 
 function SignUp2() {
     const [count, setCount] = useState(1);
+    const [mode, setMode] = useState("Sign Up");
     let err = null;
     let form = null;
     const navigate = useNavigate();
