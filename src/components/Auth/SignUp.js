@@ -1,18 +1,9 @@
 import React, { Component, useState } from 'react';
 import { Formik } from 'formik';
-import { Alert } from 'reactstrap';
-import { Link, redirect, useLocation } from 'react-router-dom';
-import Dashboard from '../Dashborad';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-// import { redirect } from "react-router-dom";
 import { auth } from './actionCreators';
-import { connect } from 'react-redux';
-import { Navigate } from 'react-router-dom';
-import '../css/Button.css'
-
-
-
+import '../css/Button.css';
+import '../css/components.css';
 
 function SignUp() {
 
@@ -75,23 +66,24 @@ function SignUp() {
                                     required={true}
                                     name="first_name"
                                     placeholder="Write First Name"
-                                    className="form-control"
+                                    className="input-effect"
                                     value={values.first_name}
                                     onChange={handleChange}
                                 />
-                                <br />
+                                <br /><br/><br/>
 
                                 <input
                                     required={true}
                                     name="last_Name"
                                     placeholder="Write Last Name"
-                                    className="form-control"
+                                    className="input-effect input"
+                                    // className="input"
                                     value={values.last_Name}
                                     onChange={handleChange}
                                 />
-                                <br /><br />
+                                <br /><br /><br/>
                                 <button className="arrow-button" onClick={() => setCount(count + 1)}>Next Step<span className="arrow"></span></button>
-                                <br /><br /><br />
+                                <br /><br /><br /><br/>
                                 <p style={{ textAlign: "center" }}>Already have an account? <b style={{ cursor: "pointer", color: "#1678CB", textDecoration: "underline" }} onClick={() => setMode("Login")}>LOGIN HERE!</b></p>
                                 <br />
 
@@ -104,22 +96,22 @@ function SignUp() {
                                         required={true}
                                         name="phone_number"
                                         placeholder="Phone Number"
-                                        className="form-control"
+                                        className="input-effect"
                                         value={values.phone_number}
                                         onChange={handleChange}
                                     />
-                                    <br />
+                                    <br /><br/><br/>
 
                                     <input
                                         required={true}
                                         name="email"
                                         placeholder="Enter Your Email"
-                                        className="form-control"
+                                        className="input-effect"
                                         value={values.email}
                                         onChange={handleChange}
                                     />
 
-                                    <br /><br />
+                                    <br /><br /><br />
 
                                     <div className='container'>
                                         <div className='row'>
@@ -127,7 +119,7 @@ function SignUp() {
                                             <div className='col-8'><button className="arrow-button" onClick={() => setCount(count + 1)}>Next Step<span className="arrow"></span></button></div>
                                         </div>
                                     </div>
-                                    <br /><br /><br />
+                                    <br /><br /><br /><br />
                                     <p style={{ textAlign: "center" }}>Already have an account? <b style={{ cursor: "pointer", color: "#1678CB", textDecoration: "underline" }} onClick={() => setMode("Login")}>LOGIN HERE!</b></p>
                                     <br />
 
@@ -140,12 +132,12 @@ function SignUp() {
                                             type="password"
                                             name="password"
                                             placeholder="password"
-                                            className="form-control"
+                                            className="input-effect"
                                             value={values.password}
                                             onChange={handleChange}
                                         />
                                         <span style={{ float: "left", paddingLeft: '5px', textAlign: 'left', fontStyle: "italic", color: "black" }}>{errors.password}</span>
-                                        <br /><br />
+                                        <br /><br /><br />
 
                                         <div className='container'>
                                             <div className='row'>
@@ -153,7 +145,7 @@ function SignUp() {
                                                 <div className='col-8'><button className="arrow-button" type='submit'>Sign Up<span className="arrow"></span></button></div>
                                             </div>
                                         </div>
-                                        <br /><br /><br />
+                                        <br /><br /><br /><br /><br /><br /><br /><br />
                                         <p style={{ textAlign: "center" }}>Already have an account? <b style={{ cursor: "pointer", color: "#1678CB", textDecoration: "underline" }} onClick={() => setMode("Login")}>LOGIN HERE!</b></p>
                                         <br />
                                     </div> : null
@@ -161,28 +153,31 @@ function SignUp() {
                             <p className='Title1'>Log In Form</p>
 
                             <input
+                                type="text"
                                 required={true}
                                 name="email"
                                 placeholder="Enter Your Email"
-                                className="form-control"
+                                // className="input-effect"
+                                className="input-effect"
                                 value={values.email}
                                 onChange={handleChange}
                             />
-                            <br />
+                            <br /><br/><br/>
                             <input
                                 required={true}
                                 type="password"
                                 name="password"
                                 placeholder="password"
-                                className="form-control"
+                                // className="input-effect"
+                                className="input-effect"
                                 value={values.password}
                                 onChange={handleChange}
                             />
                             <span style={{ float: "left", paddingLeft: '5px', textAlign: 'left', color: "black" }}>{errors.password}</span>
-                            <br/><br/>
+                            <br/><br/><br />
                             <div>
                                 <button className="loginButton" type='submit'>Login<span className ="arrow"></span></button>
-                                <br /><br /><br />
+                                <br /><br /><br /><br />
                                 <p style={{ textAlign: "center" }}>Don't have an account? <b style={{ cursor: "pointer", color: "#1678CB", textDecoration: "underline" }} onClick={() => setMode("Sign Up")}>SIGN UP HERE!</b></p>
                                 <br />
                             </div>

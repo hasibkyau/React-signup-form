@@ -1,7 +1,7 @@
 import React from 'react';
 import Dashboard from './Dashborad';
 import SignUp from './Auth/SignUp';
-import './components.css';
+import '../components/css/components.css';
 import logo from '../assets/logo.jpg';
 import background from '../assets/background.jpg'
 
