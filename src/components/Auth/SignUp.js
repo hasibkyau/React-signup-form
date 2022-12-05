@@ -37,24 +37,7 @@ function SignUp() {
             (values) => {
 
                 auth(values, mode);
-                // console.log(values)
-                // // this.setState({step: 0})
-
-                // axios.post('https://test.nexisltd.com/signup', values)
-                //     .then(response => {
-                //         console.log(response)
-                //         if (response.status === 200) {
-                //             redirect("/login")
-                //         }
-                //     });
-                // mode = "Sign Up"
-                // history.push("/");
-                // return redirect('/Dashboard')
-                // redirect("dashboard")
-                // return <Navigate to="/Dashboard" replace={true} />
-                // window.location("/Dashboard")
-                // this.state.dashboard = true
-                // this.render()
+                
                 setTimeout(() => {
                     navigate("dashboard");  
                   }, 3000);
