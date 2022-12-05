@@ -28,35 +28,38 @@ class Dashboard extends Component {
 
             DashBoard = <div>
                 {/* Logo */}
-                <img src={logo} alt="Smiley face" width="164.21" height="60" style={{ float: "left" }} />
-                
+                <img className='img-fluid m-2' src={logo} alt="Smiley face" width="164.21" height="60" style={{ float: "left" }} />
+
                 {/* Logout */}
-                <Link to={'/'} style={{ float: "right" }}>Logout</Link>
                 
+
                 <br />
 
                 <div className='container'>
+                {/* <img className='img-fluid' src={logo} alt="Smiley face" width="164.21" height="60" style={{ float: "left" }} /> */}
+
+                <Link to={'/'} style={{ float: "right" }}>Logout</Link>
                     <br /><br />
 
                     {/* Title */}
-                    <div className='row'>
-                        <div style={{ width: "480px", height: "72px", borderRadius: "5px", margin: "auto", background: "#1678CB", }}>
-                            <h1 style={{ fontSize: "36px", color: "white", paddingTop: "9px" }}>Attendance Information</h1>
+                    <div className='row' >
+                        <div style={{margin:"auto"}}>
+                            <h1 className='bg-primary' style={{ fontSize: "36", color: "white", padding: "15px" }}>Attendance Information</h1>
+
                         </div>
-                        <br /><br />
                     </div>
 
                     <br /><br />
 
                     {/* Attendance Table */}
-                    <Table style={{textAlign:"left"}}>
+                    <Table style={{ textAlign: "left" }}>
                         <thead >
                             <tr >
                                 <th>#</th>
                                 <th>ID</th>
-                                <th>Employee Name</th>
-                                <th>Employee Position</th>
-                                <th>Branch</th>
+                                <th>Name</th>
+                                <th>Position</th>
+                                {/* <th>Branch</th> */}
                                 <th>Date</th>
                                 <th>Status</th>
                             </tr>
@@ -66,13 +69,13 @@ class Dashboard extends Component {
                             // Extracting the data found from GET request
                             Object.keys(employee).map((key, index) => {
                                 return (
-                                    <tbody  key={index}>
+                                    <tbody key={index}>
                                         <tr>
                                             <th scope='row'>{index}</th>
                                             <td>{list[key].id}</td>
                                             <td>{list[key].name}</td>
                                             <td>{list[key].position}</td>
-                                            <td>{list[key].branch}</td>
+                                            {/* <td>{list[key].branch}</td> */}
                                             {
                                                 (Object.keys(list[key].attendance).map((key2, index) => {
 
@@ -107,7 +110,7 @@ class Dashboard extends Component {
         }
 
         return (
-            <div>{ DashBoard }</div>
+            <div>{DashBoard}</div>
         )
     }
 }
