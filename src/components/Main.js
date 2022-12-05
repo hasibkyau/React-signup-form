@@ -1,13 +1,9 @@
 import React from 'react';
 import Dashboard from './Dashborad';
-import Login from './Auth/Login';
 import SignUp from './Auth/SignUp';
 import './components.css';
 import logo from '../assets/logo.jpg';
 import background from '../assets/background.jpg'
-import { createRoot } from "react-dom/client";
-import Login2 from './Auth/Login2';
-import SignUp2 from './Auth/SignUp2';
 
 import {
     createBrowserRouter,
