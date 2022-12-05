@@ -65,11 +65,12 @@
     display: inline;
     align-items: center;
     padding: 10px;
-    background: white;
+    padding-left: 54px;
+    /* margin-left: 54px; */
+    background: #FFFFFF;
     border: #FFFFFF;
     color: #767676;
 }
-
 
 .loginButton {
     display: flex;
