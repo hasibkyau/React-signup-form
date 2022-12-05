@@ -22,3 +22,25 @@
     /* padding: 20px; */
     color: #000000;
 }
+
+.input {
+    border: 0px;
+    width: 80%;
+    /* background-color: red; */
+    border-bottom: 2px solid #B4B4B4;
+    /* margin: 10px; */
+
+}
+
+
+
+:focus {
+    outline: none;
+}
+
+.input-effect {
+    width: 80%;
+    border: 0;
+    padding: 7px 0;
+    border-bottom: 2px solid #B4B4B4;;
+}
