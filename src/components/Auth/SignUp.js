@@ -168,7 +168,6 @@ function SignUp() {
                                 type="password"
                                 name="password"
                                 placeholder="password"
-                                // className="input-effect"
                                 className="input-effect"
                                 value={values.password}
                                 onChange={handleChange}
@@ -182,7 +181,6 @@ function SignUp() {
                                 <br />
                             </div>
                         </div>}
-                    {/* {this.state.dashboard === true ? <Navigate to="/Dashboard" replace={true} /> : console.log("render")} */}
                 </form>
             )
         }

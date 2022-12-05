@@ -5,7 +5,30 @@
     background: #ae6969;
 }
 
+@media only screen and (min-width: 1201px) {
+    .leftBox {
+        float: right;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .leftBox {
+        float: none;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .leftBox {
+        float: none;
+        margin-left: 50%;
+        margin: 0 0 0 45px;
+    }
+}
+
 .BoxShadow {
+    width: 516px;
+    height: 630px;
+
     background: #FFFFFF;
     box-shadow: 1px -10px 25px rgba(201, 201, 201, 0.25), -1px 10px 25px rgba(147, 147, 147, 0.25);
     border-radius: 15px;
@@ -13,34 +36,33 @@
 
 .Title1 {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    /* font-style: normal; */
     font-weight: 600;
     font-size: 20px;
     line-height: 24px;
     text-align: center;
     padding: 109px;
-    /* padding: 20px; */
     color: #000000;
 }
 
 .input {
     border: 0px;
     width: 80%;
-    /* background-color: red; */
     border-bottom: 2px solid #B4B4B4;
-    /* margin: 10px; */
-
 }
-
-
 
 :focus {
     outline: none;
 }
 
 .input-effect {
-    width: 80%;
+    width: 368.5px;
     border: 0;
     padding: 7px 0;
-    border-bottom: 2px solid #B4B4B4;;
+    border-bottom: 2px solid #B4B4B4;
+    ;
+}
+
+.bgImg {
+    width: 612px;
+    height: 437px;
 }

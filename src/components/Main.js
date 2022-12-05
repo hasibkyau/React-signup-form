@@ -16,25 +16,21 @@ const router = createBrowserRouter([
     {
         path: "/",
         element: (
-            <div>
-                                
-                    <img className='img-fluid' src={logo} alt="logo" width="164.21" height="60" style={{ float: "left" }} />
-            
-            
-            <div className='container pt-3'>
+            <div style={{ margin: "5px" }}>
+                <div style={{ position: "absolute", display: "inline-flex", left: "50px", top: "50px" }}>
+                    <img className='' src={logo} alt="logo" width="164.21" height="60" />
+                </div>
 
-                <div className='row'>
+                <div className='' style={{ display: "inline-flex", paddingTop: "5%" }}>
+                    <img className='bgImg' src={background} alt="Smiley face" />
+                </div>
 
-                    <div className='co-12 col-sm-12 col-md-12 col-lg-7 '>
-                        <img className='img-fluid' src={background} alt="Smiley face" width="612" height="437" style={{ float: "left" }} />
-                    </div>
-
-
-                    <div className='col-12 col-sm-12 col-md-12 col-lg-5 BoxShadow'>
+                <div className='leftBox' style={{ display: "inline-flex" }}>
+                    <div className='BoxShadow' >
                         <SignUp />
                     </div>
-                    </div>
                 </div>
+
             </div>
         ),
     },
