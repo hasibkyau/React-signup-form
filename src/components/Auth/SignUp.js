@@ -44,11 +44,11 @@ function SignUp() {
             } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
                 errors.email = 'Invalid email address';
             }
-            if (!values.password) {
-                errors.password = 'Required';
-            } else if (values.password.length < 8) {
-                errors.password = 'Must be atleast 8 characters!';
-            }
+            // if (!values.password) {
+            //     errors.password = 'Required';
+            // } else if (values.password.length < 8) {
+            //     errors.password = 'Must be atleast 8 characters!';
+            // }
             //console.log("Errors:", errors)
             return errors;
         }
@@ -128,7 +128,6 @@ function SignUp() {
                                     <div>
                                         <p className='Title1'>SignUp Form</p>
                                         <input
-                                            required={true}
                                             type="password"
                                             name="password"
                                             placeholder="password"
