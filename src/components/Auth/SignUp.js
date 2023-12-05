@@ -164,7 +164,6 @@ function SignUp() {
                             />
                             <br /><br/><br/>
                             <input
-                                required={true}
                                 type="password"
                                 name="password"
                                 placeholder="password"
